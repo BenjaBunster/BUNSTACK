@@ -13,6 +13,31 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
     });
 });
 
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+        navMenu.classList.remove('active');
+    }
+});
+
+// Touch support for mobile menu
+let touchStartY = 0;
+navMenu.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+});
+
+navMenu.addEventListener('touchmove', (e) => {
+    if (navMenu.classList.contains('active')) {
+        const touchY = e.touches[0].clientY;
+        const deltaY = touchY - touchStartY;
+        
+        // Close menu with upward swipe
+        if (deltaY < -50) {
+            navMenu.classList.remove('active');
+        }
+    }
+});
+
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
