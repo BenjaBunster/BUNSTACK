@@ -83,52 +83,23 @@ En un sitio web real, esto redirigiría a un formulario de contratación o siste
     });
 });
 
-// Contact form handling
+// Contact form handling with FormSubmit
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(this);
-        const name = this.querySelector('input[type="text"]').value;
-        const email = this.querySelector('input[type="email"]').value;
-        const projectType = this.querySelector('select').value;
-        const message = this.querySelector('textarea').value;
-        
-        // Validate form
-        if (!name || !email || !projectType || !message) {
-            alert('Por favor, completa todos los campos.');
-            return;
-        }
-        
-        // Email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            alert('Por favor, ingresa un email válido.');
-            return;
-        }
-        
-        // Simulate form submission
+        // Let the form submit naturally to FormSubmit
         const submitButton = this.querySelector('.btn-primary');
         const originalText = submitButton.textContent;
         
+        // Show loading state
         submitButton.textContent = 'Enviando...';
         submitButton.disabled = true;
         
-        // Simulate API call
+        // Re-enable button after a delay (in case user comes back)
         setTimeout(() => {
-            alert(`¡Gracias ${name}! Tu consulta ha sido enviada exitosamente. 
-            
-Nos pondremos en contacto contigo dentro de las próximas 24 horas para discutir tu proyecto de ${projectType}.
-            
-En un sitio web real, esta información se enviaría a un servidor.`);
-            
-            // Reset form
-            this.reset();
             submitButton.textContent = originalText;
             submitButton.disabled = false;
-        }, 2000);
+        }, 3000);
     });
 }
 
