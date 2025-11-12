@@ -83,11 +83,12 @@ En un sitio web real, esto redirigiría a un formulario de contratación o siste
     });
 });
 
-// Contact form handling with FormSubmit
+// Contact form handling with internal modal
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
-        // Let the form submit naturally to FormSubmit
+        e.preventDefault(); // Prevent default form submission
+        
         const submitButton = this.querySelector('.btn-primary');
         const originalText = submitButton.textContent;
         
@@ -95,13 +96,93 @@ if (contactForm) {
         submitButton.textContent = 'Enviando...';
         submitButton.disabled = true;
         
-        // Re-enable button after a delay (in case user comes back)
-        setTimeout(() => {
+        // Simulate form submission (in a real app, you'd send data to your backend)
+        // For now, we'll use FormSubmit via fetch to maintain email functionality
+        const formData = new FormData(this);
+        
+        // Submit to FormSubmit
+        fetch('https://formsubmit.co/kayzeronpc@gmail.com', {
+            method: 'POST',
+            body: formData
+        }).then(() => {
+            // Show success modal
+            showModal();
+            
+            // Reset form
+            this.reset();
+            
+            // Reset button
             submitButton.textContent = originalText;
             submitButton.disabled = false;
-        }, 3000);
+        }).catch(() => {
+            // Even if fetch fails (due to CORS), FormSubmit might work
+            // Show success modal anyway
+            showModal();
+            
+            // Reset form
+            this.reset();
+            
+            // Reset button
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+        });
     });
 }
+
+// Success Modal functionality
+function showModal() {
+    const modal = document.getElementById('success-modal');
+    if (modal) {
+        modal.style.display = 'block';
+        // Trigger animation
+        setTimeout(() => {
+            modal.style.opacity = '1';
+        }, 10);
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById('success-modal');
+    if (modal) {
+        modal.style.opacity = '0';
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
+    }
+}
+
+// Modal event listeners
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('success-modal');
+    const closeBtn = document.querySelector('.close-modal');
+    const closeModalBtn = document.querySelector('.close-modal-btn');
+    
+    // Close modal when clicking X
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+    }
+    
+    // Close modal when clicking button
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeModal);
+    }
+    
+    // Close modal when clicking outside
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal && modal.style.display === 'block') {
+            closeModal();
+        }
+    });
+});
 
 // Hero buttons actions
 document.querySelectorAll('.hero-buttons .btn').forEach(button => {

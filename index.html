@@ -170,18 +170,15 @@
                         </div>
                     </div>
                 </div>
-                <form class="contact-form" action="https://formsubmit.co/benjamin.bunster@gmail.com" method="POST">
-                    <!-- FormSubmit Configuration -->
-                    <input type="hidden" name="_subject" value="Nueva consulta desde BUNSTACK">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table">
-                    <input type="hidden" name="_next" value="https://bunstack.vercel.app/#contacto">
-                    
+                <form class="contact-form" id="contact-form">
                     <div class="form-group">
                         <input type="text" name="name" placeholder="Nombre completo" required>
                     </div>
                     <div class="form-group">
                         <input type="email" name="email" placeholder="Correo electrónico" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="phone" placeholder="Número telefónico" required>
                     </div>
                     <div class="form-group">
                         <select name="project_type" required>
@@ -194,6 +191,7 @@
                         <textarea name="message" placeholder="Describe tu proyecto" rows="4" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Enviar Consulta</button>
+                </form>
                 </form>
             </div>
         </div>
@@ -228,6 +226,44 @@
             </div>
         </div>
     </footer>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>¡Gracias por contactarnos!</h2>
+            <p>Tu mensaje ha sido enviado exitosamente. Nos pondremos en contacto contigo dentro de las próximas 48 horas.</p>
+            <button class="btn btn-primary modal-btn" onclick="closeModal()">Entendido</button>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h2>¡Mensaje Enviado Exitosamente!</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Gracias por contactarnos. Tu consulta ha sido recibida correctamente.</p>
+                <div class="success-details">
+                    <h3><i class="fas fa-clock"></i> ¿Qué sigue ahora?</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Revisaremos tu consulta</li>
+                        <li><i class="fas fa-check"></i> Te contactaremos dentro de 48 horas</li>
+                        <li><i class="fas fa-check"></i> Prepararemos una propuesta personalizada</li>
+                    </ul>
+                </div>
+                <button class="btn btn-primary close-modal-btn">Entendido</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
