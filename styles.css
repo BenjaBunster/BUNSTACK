@@ -801,20 +801,23 @@ section {
         grid-template-columns: 1fr;
         gap: 1.5rem;
         max-width: 400px;
+        display: flex;
+        flex-direction: column;
     }
 
     .pricing-card {
         padding: 2rem 1.5rem;
+        order: 2; /* Default order for all cards */
     }
 
     .pricing-card.featured {
         transform: none;
-        order: 2; /* PYME va segundo en móvil */
+        order: 2; /* PYME (featured) goes second */
     }
 
-    /* Personal plan goes first on mobile */
-    .pricing-card:not(.featured) {
-        order: 1;
+    /* Personal plan (first card without featured class) goes first */
+    .pricing-card:first-child {
+        order: 1 !important;
     }
 
     /* Contact improvements */
@@ -893,9 +896,25 @@ section {
     }
 
     /* Pricing card improvements */
+    .pricing-grid {
+        display: flex !important;
+        flex-direction: column;
+    }
+
     .pricing-card {
         padding: 1.5rem;
         border-radius: 16px;
+        order: 2;
+    }
+
+    /* Force Personal plan to be first */
+    .pricing-card:first-child {
+        order: 1 !important;
+    }
+
+    /* PYME plan second */
+    .pricing-card.featured {
+        order: 2 !important;
     }
 
     .price .amount {
@@ -1093,6 +1112,22 @@ section {
     .nav-menu a {
         padding: 0.75rem;
         font-size: 1rem;
+    }
+}
+
+/* Additional mobile-specific ordering */
+@media (max-width: 600px) {
+    .pricing-grid {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    .pricing-card:nth-child(1) {
+        order: 1 !important; /* Personal first */
+    }
+    
+    .pricing-card:nth-child(2) {
+        order: 2 !important; /* PYME second */
     }
 }
 
