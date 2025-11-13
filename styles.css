@@ -1053,6 +1053,7 @@ section {
     /* Section spacing */
     section {
         padding: 3rem 0;
+        scroll-margin-top: 80px; /* Account for fixed navbar */
     }
 
     .section-title {
@@ -1135,10 +1136,18 @@ section {
     /* Container padding */
     .container {
         padding: 0 1rem;
+        max-width: 100%;
+        overflow-x: hidden;
     }
 
     .nav-container {
         padding: 0.75rem 1rem;
+    }
+
+    /* Section spacing improvements */
+    section {
+        padding: 2.5rem 0;
+        scroll-margin-top: 80px; /* Account for fixed navbar height */
     }
 
     /* Typography adjustments */
@@ -1211,6 +1220,54 @@ section {
         max-width: none;
     }
 
+    /* Services improvements for very small screens */
+    .services {
+        padding: 3rem 0;
+        scroll-margin-top: 80px; /* Account for fixed navbar */
+    }
+
+    .services .container {
+        padding: 0 1rem;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .service-card {
+        padding: 1.5rem 1rem;
+        margin-bottom: 1rem;
+        border-radius: 16px;
+        position: relative;
+        z-index: 1;
+        background: var(--bg-card);
+        box-shadow: none;
+        transform: none;
+        transition: none;
+    }
+
+    .service-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .service-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .service-card p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
     /* Pricing card improvements */
     .pricing-grid {
         display: flex !important;
@@ -1258,9 +1315,33 @@ section {
     }
 
     /* Form improvements */
+    /* Contact improvements for very small screens */
+    .contact {
+        padding: 2.5rem 0;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .contact-info h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .contact-info p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+    }
+
     .contact-form {
         padding: 1.5rem;
         border-radius: 16px;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0;
     }
 
     .form-group {
@@ -1273,6 +1354,60 @@ section {
         padding: 0.875rem;
         font-size: 0.9rem;
         border-radius: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        min-height: 50px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    .form-group select {
+        background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300d4ff'><path d='M7 10l5 5 5-5z'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        background-size: 1rem;
+        padding-right: 2.5rem;
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
+
+    /* Button improvements in form */
+    .contact-form .btn {
+        width: 100%;
+        padding: 1rem;
+        font-size: 0.95rem;
+        margin-top: 0.5rem;
+    }
+
+    /* Contact methods improvements */
+    .contact-methods {
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-method {
+        padding: 0.5rem 0;
+        font-size: 0.9rem;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
+    .contact-method i {
+        font-size: 1rem !important;
+        width: 18px;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .contact-method span {
+        word-break: break-word;
+        flex: 1;
+        min-width: 0;
+        line-height: 1.4;
     }
 
     /* Service card improvements */
@@ -1724,6 +1859,7 @@ section {
 /* Smooth scrolling */
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Account for fixed navbar */
 }
 
 /* Custom scrollbar */
@@ -1742,4 +1878,36 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--accent-secondary);
+}
+
+/* Extra small screens (< 400px) */
+@media (max-width: 400px) {
+    .container {
+        padding: 0 0.75rem;
+    }
+
+    .contact-form {
+        padding: 1rem;
+        margin: 0 -0.25rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    .contact-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .contact-info p {
+        font-size: 0.85rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+        padding: 0 0.5rem;
+    }
 }
